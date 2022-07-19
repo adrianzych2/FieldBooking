@@ -1,7 +1,4 @@
-﻿using FieldBooking.Models;
-using FieldBooking.Repository.Interfaces;
-
-namespace FieldBooking.Services
+﻿namespace FieldBooking.Services
 {
     public class BookingService
     {
