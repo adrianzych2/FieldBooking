@@ -4,16 +4,18 @@ using FieldBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FieldBooking.Data.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(FieldBookingContext))]
-    partial class FieldBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20220720133753_AddRoles")]
+    partial class AddRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,12 +153,14 @@ namespace FieldBooking.Data.Migrations
                     b.Property<DateTime>("StartBooking")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FieldId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -254,15 +258,15 @@ namespace FieldBooking.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f928db78-ad27-40f5-a14c-7ae724fb3fed",
-                            ConcurrencyStamp = "0463a1e0-61d8-4485-8a38-e7d7069e7fc1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Id = "46ed3ea1-6bf9-4d5b-97a6-5f9f5f5861e9",
+                            ConcurrencyStamp = "988ebb32-0c70-41bd-bbe7-cf1a3c84c863",
+                            Name = "Administator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "adb9626d-1bb3-410f-90f6-df8bf8c6144e",
-                            ConcurrencyStamp = "eff926fb-1e16-464f-8317-e5672b4914a4",
+                            Id = "c69710de-0903-4f2f-bf98-7832469f6e61",
+                            ConcurrencyStamp = "a01d31c9-a28f-4b59-968d-242ba43d7670",
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         });
@@ -382,7 +386,13 @@ namespace FieldBooking.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FieldBooking.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Field");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FieldBooking.Data.Models.Field", b =>
