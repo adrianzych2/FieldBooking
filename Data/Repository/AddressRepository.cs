@@ -2,7 +2,6 @@
 using FieldBooking.Data.Models;
 using FieldBooking.Domain.Models;
 using FieldBooking.Domain.Repository;
-
 namespace FieldBooking.Data.Repository
 {
 
@@ -22,12 +21,12 @@ namespace FieldBooking.Data.Repository
             _context.Addresses.Add(address);
         }
 
-        public AddressDto GetAddress(int id)
+        public Address GetAddress(int id)
         {
             return _mapper.Map<AddressDto>(_context.Addresses.FirstOrDefault(x => x.Id == id));
         }
 
-        public List<AddressDto> GetAllAddresses()
+        public List<Address> GetAllAddresses()
         {
             return _mapper.Map<List<AddressDto>>( _context.Addresses.ToList());
         }
