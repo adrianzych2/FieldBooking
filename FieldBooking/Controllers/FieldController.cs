@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FieldBooking.Controllers
 {
     public class FieldController : Controller
     {
-        public IActionResult Index()
+
+        public FieldController()
         {
-            return View();
+            
         }
 
 
