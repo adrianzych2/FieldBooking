@@ -1,9 +1,9 @@
-﻿using Data.Models;
+﻿using FieldBooking.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Data
+namespace FieldBooking.Data
 {
     public class FieldBookingContext : IdentityDbContext
     {

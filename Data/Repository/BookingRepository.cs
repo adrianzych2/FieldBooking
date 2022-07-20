@@ -1,4 +1,8 @@
-﻿namespace Data.Repository
+﻿using FieldBooking.Data.Models;
+using FieldBooking.Domain.Models;
+using FieldBooking.Domain.Repository;
+
+namespace FieldBooking.Data.Repository
 {
     public class BookingRepository : IBookingRepository
     {
@@ -16,12 +20,12 @@
             _context.SaveChanges();
         }
 
-        public Booking GetBooking(int id)
+        public BookingDto GetBooking(int id)
         {
             return _context.Bookings.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Booking> GetAllBookings()
+        public List<BookingDto> GetAllBookings()
         {
             return _context.Bookings.ToList();
         }

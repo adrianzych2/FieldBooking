@@ -1,4 +1,8 @@
-﻿namespace Data.Repository
+﻿using FieldBooking.Data.Models;
+using FieldBooking.Domain.Models;
+using FieldBooking.Domain.Repository;
+
+namespace FieldBooking.Data.Repository
 {
     public class FieldRepository : IFieldRepository
     {
@@ -15,12 +19,12 @@
             _context.SaveChanges();
         }
 
-        public Field GetField(int id)
+        public FieldDto GetField(int id)
         {
             return _context.Fields.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Field> GetAllField()
+        public List<FieldDto> GetAllField()
         {
             return _context.Fields.ToList();
         }

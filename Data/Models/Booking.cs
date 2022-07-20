@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace Data.Models
+namespace FieldBooking.Data.Models
 {
     public class Booking
     {

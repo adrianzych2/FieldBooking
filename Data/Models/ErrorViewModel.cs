@@ -1,4 +1,4 @@
-namespace Data.Models
+namespace FieldBooking.Data.Models
 {
     public class ErrorViewModel
     {

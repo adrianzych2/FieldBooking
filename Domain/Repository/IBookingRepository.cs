@@ -1,6 +1,6 @@
-﻿using Domain.Models;
+﻿using FieldBooking.Domain.Models;
 
-namespace Domain.Repository
+namespace FieldBooking.Domain.Repository
 {
 
 public interface IBookingRepository

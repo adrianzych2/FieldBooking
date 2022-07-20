@@ -1,4 +1,8 @@
-﻿namespace Data.Repository
+﻿using FieldBooking.Data.Models;
+using FieldBooking.Domain.Models;
+using FieldBooking.Domain.Repository;
+
+namespace FieldBooking.Data.Repository
 {
 
     public class AddressRepository : IAddressRepository
@@ -14,12 +18,12 @@
             _context.Addresses.Add(address);
         }
 
-        public Address GetAddress(int id)
+        public AddressDto GetAddress(int id)
         {
             return _context.Addresses.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Address> GetAllAddresses()
+        public List<AddressDto> GetAllAddresses()
         {
             return _context.Addresses.ToList();
         }
