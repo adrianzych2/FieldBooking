@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.Models.Enums;
+﻿using FieldBooking.Domain.Models.Enums;
 
-namespace Domain.Models
+namespace FieldBooking.Domain.Models
 {
     public class FieldDto
     {

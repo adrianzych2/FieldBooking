@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using FieldBooking.Data.Models;
+using FieldBooking.Domain.Models;
 
-namespace Data
+namespace FieldBooking.Data
 {
-    internal class AutoMapperProfile
+    public class AutoMapperProfile : Profile
     {
+        public AutoMapperProfile()
+        {
+            CreateMap<Field, FieldDto>().ReverseMap();
+            CreateMap<Booking, BookingDto>().ReverseMap();
+            CreateMap<Calendar, CalendarDto>().ReverseMap();
+            CreateMap<Address, AddressDto>().ReverseMap();
+        }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Domain.Models.Enums;
+using FieldBooking.Domain.Models.Enums;
 
-namespace Data.Models
+namespace FieldBooking.Data.Models
 {
     public class Field
     {

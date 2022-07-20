@@ -5,11 +5,11 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldBooking", "FieldBooking\FieldBooking.csproj", "{3A3D46BB-AF80-4BD7-8EB2-A69194EE67D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1EBEEEF3-5254-4E43-B84B-D2EDC2310C0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldBooking.Tests", "Tests\FieldBooking.Tests.csproj", "{1EBEEEF3-5254-4E43-B84B-D2EDC2310C0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{0FFF063D-2113-447D-82FF-8BDCB20B01E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldBooking.Domain", "Domain\FieldBooking.Domain.csproj", "{0FFF063D-2113-447D-82FF-8BDCB20B01E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{780B5606-A844-412E-A03F-B69EF1FD34DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FieldBooking.Data", "Data\FieldBooking.Data.csproj", "{780B5606-A844-412E-A03F-B69EF1FD34DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

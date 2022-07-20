@@ -13,7 +13,7 @@ builder.Services.AddControllersWithViews();
 // Register the Swagger generator
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddAutoMapper((config) => { }, AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

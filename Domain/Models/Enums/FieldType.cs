@@ -1,4 +1,4 @@
-﻿namespace Domain.Models.Enums
+﻿namespace FieldBooking.Domain.Models.Enums
 {
     public enum FieldType
     {
