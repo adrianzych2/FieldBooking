@@ -1,10 +1,8 @@
-using System.Configuration;
-using Data;
 using FieldBooking;
 using FieldBooking.Data;
+using FieldBooking.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,9 +17,9 @@ builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<FieldBookingContext>(x => x.UseSqlServer(connectionString));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(config => config.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(config => config.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<FieldBookingContext>()
-    .AddDefaultTokenProviders(); 
+    .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

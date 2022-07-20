@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace FieldBooking.Data
 {
-    public class FieldBookingContext : IdentityDbContext
+    public class FieldBookingContext : IdentityDbContext<ApplicationUser>
     {
         protected readonly IConfiguration Configuration;
 
