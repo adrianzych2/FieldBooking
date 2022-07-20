@@ -1,5 +1,6 @@
 using System.Configuration;
 using Data;
+using FieldBooking;
 using FieldBooking.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 });
+
+builder.Services.RegisterServices();
+builder.Services.RegisterRepositories();
+builder.Services.RegisterValidators();
 
 var app = builder.Build();
 app.UseSwaggerUI();

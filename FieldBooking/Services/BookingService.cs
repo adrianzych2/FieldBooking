@@ -1,6 +1,8 @@
-﻿namespace FieldBooking.Services
+﻿using FieldBooking.Domain.Repository;
+
+namespace FieldBooking.Services
 {
-    public class BookingService
+    public class BookingService : IBookingService
     {
         private IBookingRepository _repository;
 
