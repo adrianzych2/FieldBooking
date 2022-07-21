@@ -3,12 +3,13 @@
 namespace FieldBooking.Domain.Repository
 {
 
-public interface IBookingRepository
-{
-    void AddBooking(BookingDto bookingDto);
-    BookingDto GetBooking(int id);
-    List<BookingDto> GetAllBookings();
-    void RemoveBooking(int id);
-}
+    public interface IBookingRepository
+    {
+        Task<BookingDto> CreateAsync(BookingDto bookingDto);
+        Task<BookingDto> GetAsync(int id);
+        Task<List<BookingDto>> GetAllAsync();
+        Task<BookingDto> RemoveAsync(int id);
+        Task<BookingDto> UpdateAsync(BookingDto bookingDto);
 
+    }
 }
