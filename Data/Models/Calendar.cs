@@ -13,6 +13,5 @@ namespace FieldBooking.Data.Models
         public DateTime AvailabilityHoursEnd { get; set; }
 
         public bool IsOpenInWeekend { get; set; }
-
     }
 }

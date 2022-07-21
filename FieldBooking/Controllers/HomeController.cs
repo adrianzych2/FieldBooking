@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FieldBooking.Data.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using FieldBooking.Data.Models;
 
@@ -14,11 +16,14 @@ namespace FieldBooking.Controllers
         {
             _logger = logger;
         }
+
+        [Authorize("Adimnistrator")]
         [HttpPost]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Privacy()
         {

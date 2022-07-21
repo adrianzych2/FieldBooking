@@ -12,6 +12,8 @@ namespace FieldBooking.Data
             CreateMap<Booking, BookingDto>().ReverseMap();
             CreateMap<Calendar, CalendarDto>().ReverseMap();
             CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<ApplicationUser, CreateApplicationUserDto>().ReverseMap();
+            CreateMap<ApplicationUser, LoginApplicationUserDto>().ReverseMap();
         }
     }
 }
