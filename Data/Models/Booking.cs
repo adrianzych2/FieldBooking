@@ -8,7 +8,8 @@ namespace FieldBooking.Data.Models
         [Key]
         public int Id { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public int UserId { get; set; }
+
         public int FieldId { get; set; }
         public Field Field  { get; set; }
 
