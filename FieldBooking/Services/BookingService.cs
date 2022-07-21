@@ -58,8 +58,9 @@ namespace FieldBooking.Services
 
         public async Task<List<BookingDto>> GetAllAsync()
         {
-            var allBookings = await _repository.GetAllAsync();
-            if (allBookings == null)
+            /*var allBookings = await _repository.GetAllAsync();*/
+            return  await _repository.CreateAsync(bookingDto);
+            /*if (allBookings == null)
             {
                 await _repository.CreateAsync(bookingDto);
             }
@@ -82,7 +83,7 @@ namespace FieldBooking.Services
             {
                 await _repository.CreateAsync(bookingDto);
             }
-            throw new ArgumentException("This field is booked at this time");
+            throw new ArgumentException("This field is booked at this time");*/
         }
         public async Task<BookingDto> UpdateAsync(BookingDto bookingDto)
         {

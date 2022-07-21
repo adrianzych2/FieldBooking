@@ -10,7 +10,8 @@ namespace FieldBooking.Data.Models
         public int Id { get; set; }
         public int UserId { get; set; }
 
-        [ForeignKey(nameof(Field))]
+        public int UserId { get; set; }
+
         public int FieldId { get; set; }
 
         public Field Field { get; set; }
