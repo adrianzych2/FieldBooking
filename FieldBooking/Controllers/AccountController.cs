@@ -24,6 +24,9 @@ namespace FieldBooking.Controllers
 
         [HttpPost("registration")]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register([FromBody] CreateApplicationUserDto newUser)
         {
             var applicationUser = _mapper.Map<ApplicationUser>(newUser);
