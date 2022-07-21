@@ -11,6 +11,5 @@
 
         public bool IsOpenInWeekend { get; set; }
 
-        public List<DateTime> UnavailableDays { get; set; }
     }
 }
