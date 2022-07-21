@@ -22,6 +22,8 @@ namespace FieldBooking.Data
 
         public DbSet<Field> Fields { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+
+        public DbSet<Calendar> Calendars { get; set; }
         public DbSet<Address> Addresses { get; set; }
     }
 }

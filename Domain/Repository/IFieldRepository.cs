@@ -5,9 +5,11 @@ namespace FieldBooking.Domain.Repository
 
     public interface IFieldRepository
     {
-        void AddField(FieldDto fieldDto);
-        FieldDto GetField(int id);
-        List<FieldDto> GetAllField();
-        void RemoveField(int id);
+        Task<FieldDto> CreateAsync(FieldDto fieldDto);
+        Task<FieldDto> GetAsync(int id);
+        Task<List<FieldDto>> GetAllAsync();
+        Task<FieldDto> RemoveAsync(int id);
+
+        Task<FieldDto> UpdateAsync(FieldDto fieldDto);
     }
 }

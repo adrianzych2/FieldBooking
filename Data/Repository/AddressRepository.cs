@@ -21,12 +21,12 @@ namespace FieldBooking.Data.Repository
             _context.Addresses.Add(address);
         }
 
-        public Address GetAddress(int id)
+        public AddressDto GetAddress(int id)
         {
             return _mapper.Map<AddressDto>(_context.Addresses.FirstOrDefault(x => x.Id == id));
         }
 
-        public List<Address> GetAllAddresses()
+        public List<AddressDto> GetAllAddresses()
         {
             return _mapper.Map<List<AddressDto>>( _context.Addresses.ToList());
         }
