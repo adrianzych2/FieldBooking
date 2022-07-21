@@ -31,12 +31,12 @@ namespace FieldBooking.Data.Repository
                 Console.WriteLine(e.Message);
             }
 
-            return _mapper.Map<FieldDto>(fieldDto);
+            return _mapper.Map<FieldDto>(field);
         }
 
         public async Task<FieldDto> GetAsync(int id)
         {
-            return _mapper.Map<FieldDto>(await _context.Fields.FirstOrDefaultAsync(x => x.Id == id));
+            return _mapper.Map<FieldDto>(await _context.Fields.Include(x=>x.Address).Include(x=>x.Calendar).FirstOrDefaultAsync(x => x.Id == id));
         }
 
         public async Task<List<FieldDto>> GetAllAsync ()
