@@ -38,7 +38,7 @@ namespace FieldBooking.Data.Repository
 
         public async Task<BookingDto> GetAsync(int id)
         {
-            return _mapper.Map<BookingDto>(_context.Bookings.Include(x=>x.User).FirstOrDefaultAsync(x => x.Id == id));
+            return _mapper.Map<BookingDto>(_context.Bookings.FirstOrDefaultAsync(x => x.Id == id));
         }
 
         public async Task<List<BookingDto>> GetAllAsync()
@@ -68,7 +68,7 @@ namespace FieldBooking.Data.Repository
 
         public async Task<BookingDto> UpdateAsync(BookingDto bookingDto)
         {
-            var booking = await _context.Bookings.Include(x => x.User).FirstOrDefaultAsync();
+            var booking = await _context.Bookings.FirstOrDefaultAsync();
             if (booking is null) throw new ArgumentException($"Can't find booking in database");
             _mapper.Map(bookingDto, booking);
             await _context.SaveChangesAsync();
