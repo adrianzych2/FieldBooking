@@ -24,9 +24,6 @@ namespace FieldBooking.Controllers
 
         [HttpPost("registration")]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Register([FromBody] CreateApplicationUserDto newUser)
         {
             var applicationUser = _mapper.Map<ApplicationUser>(newUser);
@@ -45,10 +42,6 @@ namespace FieldBooking.Controllers
 
         [HttpPost("login")]
         [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Login([FromBody] LoginApplicationUserDto loginUser)
         {
             var foundUser = await _userManager.FindByEmailAsync(loginUser.Email);
