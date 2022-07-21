@@ -4,16 +4,18 @@ using FieldBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FieldBooking.Data.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(FieldBookingContext))]
-    partial class FieldBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20220721155420_deleteUserInBooking")]
+    partial class deleteUserInBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,15 +256,15 @@ namespace FieldBooking.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f928db78-ad27-40f5-a14c-7ae724fb3fed",
-                            ConcurrencyStamp = "0463a1e0-61d8-4485-8a38-e7d7069e7fc1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Id = "8847a938-9243-48a9-9220-bf72652fd94c",
+                            ConcurrencyStamp = "db738869-642a-47eb-869b-52da1a7f7758",
+                            Name = "Administator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "adb9626d-1bb3-410f-90f6-df8bf8c6144e",
-                            ConcurrencyStamp = "eff926fb-1e16-464f-8317-e5672b4914a4",
+                            Id = "64a88ff6-7f18-4aca-af54-3f720097f6bb",
+                            ConcurrencyStamp = "75cc1c7c-2742-4605-9da5-5d2ce99d2bea",
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         });
