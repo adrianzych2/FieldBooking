@@ -9,6 +9,7 @@ namespace FieldBooking
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IBookingService, BookingService>();
+            services.AddScoped<IFieldService, FieldService>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
