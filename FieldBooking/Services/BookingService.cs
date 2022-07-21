@@ -1,4 +1,5 @@
-﻿using FieldBooking.Domain.Models;
+﻿using System.Diagnostics;
+using FieldBooking.Domain.Models;
 using FieldBooking.Domain.Repository;
 
 namespace FieldBooking.Services
@@ -12,6 +13,8 @@ namespace FieldBooking.Services
         {
             _repository = bookingRepository;
         }
+
+        public async Task<BookingDto> CreateAsync(BookingDto bookingDto)
 
         public async Task<BookingDto> CreateAsync(BookingDto bookingDto)
         {
@@ -55,6 +58,13 @@ namespace FieldBooking.Services
 
         public async Task<List<BookingDto>> GetAllAsync()
         {
+            var allBookings = await _repository.GetAllAsync();
+            if (allBookings == null)
+            {
+                await _repository.CreateAsync(bookingDto);
+            }
+            var sameDayBookings = allBookings.Where(x => x.FieldId == bookingDto.FieldId)
+                .Where(x => x.StartBooking.Day == bookingDto.StartBooking.Day).ToList();
             return await _repository.GetAllAsync();
         }
 
@@ -63,6 +73,17 @@ namespace FieldBooking.Services
             return await _repository.RemoveAsync(id);
         }
 
+            if (sameDayBookings.FirstOrDefault(x=>x.StartBooking <= bookingDto.StartBooking && x.EndBooking >= bookingDto.EndBooking) != null
+                && (sameDayBookings.FirstOrDefault(x => x.StartBooking >= bookingDto.StartBooking && x.StartBooking >= bookingDto.StartBooking) != null))
+            {
+                await _repository.CreateAsync(bookingDto);
+            }
+            else if (sameDayBookings.Count == 0)
+            {
+                await _repository.CreateAsync(bookingDto);
+            }
+            throw new ArgumentException("This field is booked at this time");
+        }
         public async Task<BookingDto> UpdateAsync(BookingDto bookingDto)
         {
             return await _repository.UpdateAsync(bookingDto);
