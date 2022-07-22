@@ -15,6 +15,8 @@ namespace FieldBooking.Data
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<ApplicationUser, CreateApplicationUserDto>().ReverseMap();
             CreateMap<ApplicationUser, LoginApplicationUserDto>().ReverseMap();
+            //do usuniecia
+            CreateMap<ApplicationUser, IdentityUser>().ReverseMap();
         }
     }
 }

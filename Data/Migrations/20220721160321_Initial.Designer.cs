@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Data.Migrations
+namespace FieldBooking.Data.Migrations
 {
     [DbContext(typeof(FieldBookingContext))]
-    [Migration("20220721155420_deleteUserInBooking")]
-    partial class deleteUserInBooking
+    [Migration("20220721160321_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -256,15 +256,15 @@ namespace Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8847a938-9243-48a9-9220-bf72652fd94c",
-                            ConcurrencyStamp = "db738869-642a-47eb-869b-52da1a7f7758",
+                            Id = "59e5371a-ffed-4119-8723-e35763bbff4d",
+                            ConcurrencyStamp = "b40600e3-0fc1-4b96-9e50-9d3c3febda15",
                             Name = "Administator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "64a88ff6-7f18-4aca-af54-3f720097f6bb",
-                            ConcurrencyStamp = "75cc1c7c-2742-4605-9da5-5d2ce99d2bea",
+                            Id = "b51cb9ca-c747-4f63-8b39-8dc565a20127",
+                            ConcurrencyStamp = "5929c9a2-73cb-4606-8ab7-2aa83bb9038d",
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         });

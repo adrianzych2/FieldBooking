@@ -8,7 +8,6 @@ namespace FieldBooking.Domain.Models
         public int Id { get; set; }
         public int UserId { get; set; }
 
-        public int UserId { get; set; }
         public int FieldId { get; set; }
 
         public FieldDto FieldDto { get; set; }
