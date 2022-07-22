@@ -22,7 +22,7 @@ namespace FieldBooking.Controllers
         //do testów 
         [Authorize(Roles ="Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [Route("Add")]
         public async Task<ActionResult> Create([FromBody] FieldDto fieldDto)

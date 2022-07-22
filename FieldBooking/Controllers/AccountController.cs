@@ -66,6 +66,23 @@ namespace FieldBooking.Controllers
             return NotFound();
         }
 
+        [HttpDelete("logout")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Logout()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                await _signInManager.SignOutAsync();
+
+                return Ok();
+            }
+           return BadRequest();
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
