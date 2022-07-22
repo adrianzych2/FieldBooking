@@ -23,7 +23,9 @@ namespace FieldBooking.Data.Repository
         public async Task<BookingDto> CreateAsync(BookingDto bookingDto)
         {
             var booking = _mapper.Map<Booking>(bookingDto);
+          
             await _context.Bookings.AddAsync(booking);
+                
             try
             {
                 await _context.SaveChangesAsync();
@@ -38,29 +40,29 @@ namespace FieldBooking.Data.Repository
 
         public async Task<BookingDto> GetAsync(int id)
         {
-            return _mapper.Map<BookingDto>(_context.Bookings.FirstOrDefaultAsync(x => x.Id == id));
+            return _mapper.Map<BookingDto>(await _context.Bookings.FirstOrDefaultAsync(x => x.Id == id));
         }
 
         public async Task<List<BookingDto>> GetAllAsync()
 
         {
-            List<BookingDto> allBookings;
+
             try
             {
-                allBookings = _mapper.Map<List<BookingDto>>(_context.Bookings.ToListAsync());
-                return _mapper.Map<List<BookingDto>>(_context.Bookings.ToListAsync());
+                var allBookings = await _context.Bookings.ToListAsync();
+                return _mapper.Map<List<BookingDto>>(allBookings);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                throw new ArgumentException();
             }
         }
 
         public async Task<BookingDto> RemoveAsync(int id)
         {
-            var booking = _context.Bookings.FirstOrDefault(x => x.Id == id);
-            if (booking is null) throw new ArgumentException($"Can't find user with specified id: {id}");
+            var booking = await _context.Bookings.FirstOrDefaultAsync(x => x.Id == id);
+            if (booking is null) throw new ArgumentException($"Can't find user with specified id: {id}"); 
             _context.Bookings.Remove(booking);
             await _context.SaveChangesAsync();
             return _mapper.Map<BookingDto>(booking);
@@ -68,7 +70,7 @@ namespace FieldBooking.Data.Repository
 
         public async Task<BookingDto> UpdateAsync(BookingDto bookingDto)
         {
-            var booking = await _context.Bookings.FirstOrDefaultAsync();
+            var booking = await _context.Bookings.FirstOrDefaultAsync(booking=>booking.Id==bookingDto.Id);
             if (booking is null) throw new ArgumentException($"Can't find booking in database");
             _mapper.Map(bookingDto, booking);
             await _context.SaveChangesAsync();

@@ -38,6 +38,7 @@ namespace FieldBooking.Data
                     Name = "Player",
                     NormalizedName = "PLAYER"
                 });
+
         }
 
         public DbSet<Field> Fields { get; set; }
