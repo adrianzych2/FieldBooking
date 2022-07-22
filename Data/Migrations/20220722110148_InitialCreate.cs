@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Data.Migrations
+namespace FieldBooking.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +20,7 @@ namespace Data.Migrations
                     PostalCode = table.Column<string>(type: "varchar(25)", nullable: false),
                     Country = table.Column<string>(type: "varchar(25)", nullable: false),
                     Street = table.Column<string>(type: "varchar(25)", nullable: false),
-                    StreetNumber = table.Column<int>(type: "int", nullable: false),
-                    Image = table.Column<string>(type: "varchar(100)", nullable: false)
+                    StreetNumber = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,6 +46,8 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -67,26 +69,20 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fields",
+                name: "Calendars",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "varchar(50)", nullable: false),
-                    FieldType = table.Column<int>(type: "int", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    OneBookingTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    AvailableFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AvailableTo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AvailabilityHoursStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AvailabilityHoursEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsOpenInWeekend = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fields", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Fields_Addresses_AddressId",
-                        column: x => x.AddressId,
-                        principalTable: "Addresses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                    table.PrimaryKey("PK_Calendars", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,6 +191,74 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Fields",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "varchar(50)", nullable: false),
+                    FieldType = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false),
+                    OneBookingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CalendarId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fields", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Fields_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Fields_Calendars_CalendarId",
+                        column: x => x.CalendarId,
+                        principalTable: "Calendars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bookings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    FieldId = table.Column<int>(type: "int", nullable: false),
+                    StartBooking = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndBooking = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Confirmed = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bookings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bookings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Bookings_Fields_FieldId",
+                        column: x => x.FieldId,
+                        principalTable: "Fields",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "adb9626d-1bb3-410f-90f6-df8bf8c6144e", "eff926fb-1e16-464f-8317-e5672b4914a4", "Player", "PLAYER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "f928db78-ad27-40f5-a14c-7ae724fb3fed", "0463a1e0-61d8-4485-8a38-e7d7069e7fc1", "Admin", "ADMIN" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -235,9 +299,24 @@ namespace Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_FieldId",
+                table: "Bookings",
+                column: "FieldId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bookings_UserId",
+                table: "Bookings",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Fields_AddressId",
                 table: "Fields",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fields_CalendarId",
+                table: "Fields",
+                column: "CalendarId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -258,7 +337,7 @@ namespace Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Fields");
+                name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -267,7 +346,13 @@ namespace Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Fields");
+
+            migrationBuilder.DropTable(
                 name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "Calendars");
         }
     }
 }

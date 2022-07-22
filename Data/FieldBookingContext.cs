@@ -28,8 +28,8 @@ namespace FieldBooking.Data
                 new IdentityRole
                 {
                     Id = Guid.NewGuid().ToString(),
-                    Name = "Administator",
-                    NormalizedName = "ADMINISTRATOR"
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
 
                 },
                 new IdentityRole
