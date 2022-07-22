@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FieldBooking.Data.Models;
 using FieldBooking.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace FieldBooking.Data
 {
@@ -14,6 +15,8 @@ namespace FieldBooking.Data
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<ApplicationUser, CreateApplicationUserDto>().ReverseMap();
             CreateMap<ApplicationUser, LoginApplicationUserDto>().ReverseMap();
+            //do usuniecia
+            CreateMap<ApplicationUser, IdentityUser>().ReverseMap();
         }
     }
 }

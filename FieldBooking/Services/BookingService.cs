@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
-using FieldBooking.Domain.Models;
+﻿using FieldBooking.Domain.Models;
 using FieldBooking.Domain.Repository;
 
 namespace FieldBooking.Services
 {
+    
     public class BookingService : IBookingService
     {
-        private IBookingRepository _repository;
+        private readonly IBookingRepository _repository;
 
         public BookingService(IBookingRepository bookingRepository)
         {
@@ -15,25 +15,59 @@ namespace FieldBooking.Services
 
         public async Task<BookingDto> CreateAsync(BookingDto bookingDto)
         {
-            /*var allBookings = await _repository.GetAllAsync();*/
-            return  await _repository.CreateAsync(bookingDto);
-            /*if (allBookings == null)
+            if (await CheckAvailabilityAsync(bookingDto))
             {
                 await _repository.CreateAsync(bookingDto);
             }
+            throw new ArgumentException("This field is booked at this time");
+        }
+
+        public async Task<bool> CheckAvailabilityAsync(BookingDto bookingDto)
+        {
+            var allBookings = await _repository.GetAllAsync();
+
+            if (allBookings == null)
+            {
+                return true;
+            }
+
             var sameDayBookings = allBookings.Where(x => x.FieldId == bookingDto.FieldId)
                 .Where(x => x.StartBooking.Day == bookingDto.StartBooking.Day).ToList();
-
-            if (sameDayBookings.FirstOrDefault(x=>x.StartBooking <= bookingDto.StartBooking && x.EndBooking >= bookingDto.EndBooking) != null
-                && (sameDayBookings.FirstOrDefault(x => x.StartBooking >= bookingDto.StartBooking && x.StartBooking >= bookingDto.StartBooking) != null))
+            if (sameDayBookings.Count == 0)
             {
-                await _repository.CreateAsync(bookingDto);
+                return true;
             }
-            else if (sameDayBookings.Count == 0)
+            if (sameDayBookings.FirstOrDefault(x =>
+                    x.StartBooking < bookingDto.StartBooking && x.EndBooking > bookingDto.StartBooking) == null
+                && sameDayBookings.FirstOrDefault(x =>
+                    x.StartBooking > bookingDto.StartBooking && x.StartBooking < bookingDto.EndBooking) == null
+                && sameDayBookings.FirstOrDefault(x => x.StartBooking == bookingDto.StartBooking) == null)
             {
-                await _repository.CreateAsync(bookingDto);
+                return true;
             }
-            throw new ArgumentException("This field is booked at this time");*/
+            return false;
         }
+
+        public async Task<BookingDto> GetAsync(int id)
+        {
+            return await _repository.GetAsync(id);
+        }
+
+        public async Task<List<BookingDto>> GetAllAsync()
+        {
+            return await _repository.GetAllAsync();
+        }
+
+        public async Task<BookingDto> RemoveAsync(int id)
+        {
+            return await _repository.RemoveAsync(id);
+        }
+
+        public async Task<BookingDto> UpdateAsync(BookingDto bookingDto)
+        {
+            return await _repository.UpdateAsync(bookingDto);
+        }
+
+
     }
 }

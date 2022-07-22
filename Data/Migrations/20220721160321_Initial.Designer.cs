@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FieldBooking.Data.Migrations
 {
     [DbContext(typeof(FieldBookingContext))]
-    [Migration("20220722110148_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220721160321_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -153,14 +153,12 @@ namespace FieldBooking.Data.Migrations
                     b.Property<DateTime>("StartBooking")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("FieldId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -258,15 +256,15 @@ namespace FieldBooking.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f928db78-ad27-40f5-a14c-7ae724fb3fed",
-                            ConcurrencyStamp = "0463a1e0-61d8-4485-8a38-e7d7069e7fc1",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            Id = "59e5371a-ffed-4119-8723-e35763bbff4d",
+                            ConcurrencyStamp = "b40600e3-0fc1-4b96-9e50-9d3c3febda15",
+                            Name = "Administator",
+                            NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "adb9626d-1bb3-410f-90f6-df8bf8c6144e",
-                            ConcurrencyStamp = "eff926fb-1e16-464f-8317-e5672b4914a4",
+                            Id = "b51cb9ca-c747-4f63-8b39-8dc565a20127",
+                            ConcurrencyStamp = "5929c9a2-73cb-4606-8ab7-2aa83bb9038d",
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         });
@@ -386,13 +384,7 @@ namespace FieldBooking.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FieldBooking.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Field");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("FieldBooking.Data.Models.Field", b =>
