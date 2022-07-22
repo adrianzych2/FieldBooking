@@ -448,6 +448,8 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
+Migration/
+
 # End of https://www.gitignore.io/api/visualstudio,jetbrains+all,visualstudiocode
 
 Migration/
