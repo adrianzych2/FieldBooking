@@ -33,8 +33,9 @@ namespace FieldBooking.Controllers
             var result = await _userManager.CreateAsync(applicationUser, newUser.Password);
             if(result.Succeeded)
             {
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+                await _userManager.AddToRoleAsync(applicationUser, newUser.UserRoles);
 
+                var token = await _userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
                 _userManager.ConfirmEmailAsync(applicationUser, token);
 
                 return Ok(result);
@@ -46,10 +47,10 @@ namespace FieldBooking.Controllers
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Login([FromBody] LoginApplicationUserDto loginUser)
         {
-            var applicationUser = _mapper.Map<ApplicationUser>(loginUser);
             var foundUser = await _userManager.FindByEmailAsync(loginUser.Email);
 
             if (foundUser == null)
@@ -63,6 +64,23 @@ namespace FieldBooking.Controllers
                 return Ok(result);
             }
             return NotFound();
+        }
+
+        [HttpDelete("logout")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Logout()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                await _signInManager.SignOutAsync();
+
+                return Ok();
+            }
+           return BadRequest();
         }
 
         [HttpGet]
