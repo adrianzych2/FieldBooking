@@ -254,15 +254,15 @@ namespace FieldBooking.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f928db78-ad27-40f5-a14c-7ae724fb3fed",
-                            ConcurrencyStamp = "0463a1e0-61d8-4485-8a38-e7d7069e7fc1",
+                            Id = "d02447b7-1a22-4a72-93ba-2111468dc8a6",
+                            ConcurrencyStamp = "f46bda5a-242b-47d6-a0c7-cd06ffdbc83e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "adb9626d-1bb3-410f-90f6-df8bf8c6144e",
-                            ConcurrencyStamp = "eff926fb-1e16-464f-8317-e5672b4914a4",
+                            Id = "391fe8a9-259d-41c8-9e86-6eb11fbb090b",
+                            ConcurrencyStamp = "fce23c19-a66b-428b-8c43-c0988e981306",
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         });
