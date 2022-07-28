@@ -1,6 +1,7 @@
 ﻿using FieldBooking.Data.Repository;
 using FieldBooking.Domain.Repository;
 using FieldBooking.Services;
+using FieldBooking.Services.BusinessValidation;
 
 namespace FieldBooking
 {
@@ -10,6 +11,7 @@ namespace FieldBooking
         {
             services.AddScoped<IBookingService, BookingService>();
             services.AddScoped<IFieldService, FieldService>();
+            services.AddScoped<IFieldValidationService, FieldValidationService>();
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
@@ -21,7 +23,7 @@ namespace FieldBooking
 
         public static void RegisterValidators(this IServiceCollection services)
         {
-
+            
         }
     }
 }

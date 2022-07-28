@@ -17,7 +17,7 @@ namespace FieldBooking.Domain.Models
 
         public AddressDto Address { get; set; }
 
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         public DateTime OneBookingTime { get; set; }
 

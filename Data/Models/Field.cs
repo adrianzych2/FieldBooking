@@ -21,7 +21,7 @@ namespace FieldBooking.Data.Models
         [Required]
         public Address Address { get; set; }
 
-        public int Price { get; set; }
+        public decimal Price { get; set; }
         [Required]
         public DateTime OneBookingTime { get; set; }
 
